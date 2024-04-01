@@ -20,9 +20,9 @@ export default function SuggestedUsers() {
           See All
         </Text>
       </Flex>
-      <SuggestedUser />
-      <SuggestedUser />
-      <SuggestedUser />
+      <SuggestedUser name="Ammy Jazmin" followers={1392} avatar="/img1.png" />
+      <SuggestedUser name="Josh" followers={503} avatar="/img2.png" />
+      <SuggestedUser name="Jonh Doe" followers={789} avatar="/img3.png" />
       <Box fontSize={12} color={"gray.500"}>
         2024 Built by{" "}
         <Link
