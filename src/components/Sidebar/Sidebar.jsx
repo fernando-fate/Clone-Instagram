@@ -1,5 +1,23 @@
-import { Avatar, Box, Flex, Link, Tooltip } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Link,
+  Tooltip,
+  Button,
+  Input,
+} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
 import {
   CreatePostLogo,
   InstagramLogo,
@@ -11,6 +29,7 @@ import { BiLogOut } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 
 const Sidebar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const sidebarItems = [
     { icon: <AiFillHome size={25} />, text: "Home", link: "/" },
     { icon: <SearchLogo />, text: "Search" },
@@ -78,6 +97,7 @@ const Sidebar = () => {
                 p={2}
                 w={{ base: 10, md: "full" }}
                 justifyContent={{ base: "center", md: "flex-start" }}
+                {...(item.text == "Search" && { onClick: onOpen })}
               >
                 {item.icon}
                 <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
@@ -111,6 +131,23 @@ const Sidebar = () => {
           </Link>
         </Tooltip>
       </Flex>
+      <Modal isOpen={isOpen} onClose={onClose} size={"sm"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Search user</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input type="text" variant={"flushed"} width={"full"} />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost">Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
